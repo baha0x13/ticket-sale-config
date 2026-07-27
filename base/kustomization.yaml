@@ -21,7 +21,7 @@ configMapGenerator:
     namespace: app
     literals:
       - DB_HOST=host.minikube.internal
-      - DB_PORT=3306
+      - DB_PORT=3308
       - AMQP_URL=amqp://guest:guest@rabbitmq.data
       - MOVIES_QUEUE=movies
       - ORDERS_QUEUE=orders

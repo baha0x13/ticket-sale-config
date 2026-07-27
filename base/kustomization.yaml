@@ -1,0 +1,31 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+
+resources:
+  - namespaces.yaml
+  - rabbitmq/deployment.yaml
+  - rabbitmq/service.yaml
+  - auth-service/deployment.yaml
+  - auth-service/service.yaml
+  - api-service/deployment.yaml
+  - api-service/service.yaml
+  - movie-service/deployment.yaml
+  - notifications-service/deployment.yaml
+  - frontend/deployment.yaml
+  - frontend/service.yaml
+  - ingress.yaml
+
+configMapGenerator:
+  - name: app-config
+    namespace: app
+    literals:
+      - DB_HOST=host.minikube.internal
+      - DB_PORT=3306
+      - AMQP_URL=amqp://guest:guest@rabbitmq.data
+      - MOVIES_QUEUE=movies
+      - ORDERS_QUEUE=orders
+      - NOTIFICATIONS_QUEUE=notifications
+      - AUTH_SERVICE_URL=http://auth-service:4000
+      - API_GATEWAY_URL=http://api.ticketflow.staging.local
+      - API_GATEWAY_PORT=80

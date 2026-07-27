@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-service
+  namespace: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: movie-service
+  template:
+    metadata:
+      labels:
+        app: movie-service
+    spec:
+      containers:
+        - name: movie-service
+          image: ghcr.io/baha0x13/ticket-sale-movie-service:dad26c6c803ae809cf8996e76d93c8458d96d4fa
+          ports:
+            - containerPort: 3001
+              name: actuator
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DB_PORT
+            - name: AMQP_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: AMQP_URL
+            - name: MOVIES_QUEUE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: MOVIES_QUEUE
+            - name: ORDERS_QUEUE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: ORDERS_QUEUE
+            - name: NOTIFICATIONS_QUEUE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: NOTIFICATIONS_QUEUE
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DB_PASSWORD
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DB_NAME
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: actuator
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: actuator
+            initialDelaySeconds: 5
+            periodSeconds: 10

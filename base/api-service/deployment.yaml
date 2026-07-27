@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-service
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-service
+  template:
+    metadata:
+      labels:
+        app: api-service
+    spec:
+      containers:
+        - name: api-service
+          image: ghcr.io/baha0x13/ticket-sale-api-service:dad26c6c803ae809cf8996e76d93c8458d96d4fa
+          ports:
+            - containerPort: 3030
+              name: http
+          env:
+            - name: AMQP_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: AMQP_URL
+            - name: MOVIES_QUEUE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: MOVIES_QUEUE
+            - name: AUTH_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: AUTH_SERVICE_URL
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: JWT_SECRET
+
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 15

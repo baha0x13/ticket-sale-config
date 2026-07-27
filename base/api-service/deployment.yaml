@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: api-service
-          image: ghcr.io/baha0x13/ticket-sale-api-service:dad26c6c803ae809cf8996e76d93c8458d96d4fa
+          image: ghcr.io/baha0x13/ticket-sale-api-service:REPLACE_ME
           ports:
             - containerPort: 3030
               name: http

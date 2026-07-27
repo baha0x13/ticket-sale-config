@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ghcr.io/baha0x13/ticket-sale-frontend:dad26c6c803ae809cf8996e76d93c8458d96d4fa
+          image: ghcr.io/baha0x13/ticket-sale-frontend:REPLACE_ME
           ports:
             - containerPort: 8083
               name: http

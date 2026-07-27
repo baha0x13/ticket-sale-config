@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: notifications-service
-          image: ghcr.io/baha0x13/ticket-sale-notifications-service:dad26c6c803ae809cf8996e76d93c8458d96d4fa
+          image: ghcr.io/baha0x13/ticket-sale-notifications-service:REPLACE_ME
           ports:
             - containerPort: 3001
               name: actuator
@@ -30,6 +30,31 @@ spec:
                 configMapKeyRef:
                   name: app-config
                   key: NOTIFICATIONS_QUEUE
+            - name: SMTP_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: SMTP_HOST
+            - name: SMTP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: SMTP_PORT
+            - name: SMTP_SECURE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: SMTP_SECURE
+            - name: SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: SMTP_USER
+            - name: SMTP_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: SMTP_PASS
           livenessProbe:
             httpGet:
               path: /healthz

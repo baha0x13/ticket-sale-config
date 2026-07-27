@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: movie-service
-          image: ghcr.io/baha0x13/ticket-sale-movie-service:dad26c6c803ae809cf8996e76d93c8458d96d4fa
+          image: ghcr.io/baha0x13/ticket-sale-movie-service:REPLACE_ME
           ports:
             - containerPort: 3001
               name: actuator

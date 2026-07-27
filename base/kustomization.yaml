@@ -27,5 +27,8 @@ configMapGenerator:
       - ORDERS_QUEUE=orders
       - NOTIFICATIONS_QUEUE=notifications
       - AUTH_SERVICE_URL=http://auth-service:4000
-      - API_GATEWAY_URL=http://api.ticketflow.staging.local
+      - API_GATEWAY_URL=http://api.ticket-sale.staging.local
       - API_GATEWAY_PORT=80
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_SECURE=false

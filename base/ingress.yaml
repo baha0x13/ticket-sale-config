@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ticketflow
+  name: ticket-sale
   namespace: app
 spec:
   ingressClassName: nginx
   rules:
-    - host: ticketflow.staging.local
+    - host: ticket-sale.staging.local
       http:
         paths:
           - path: /
@@ -16,7 +16,7 @@ spec:
                 name: frontend
                 port:
                   number: 80
-    - host: api.ticketflow.staging.local
+    - host: api.ticket-sale.staging.local
       http:
         paths:
           - path: /

@@ -6,12 +6,12 @@ resources:
 
 images:
   - name: ghcr.io/baha0x13/ticket-sale-api-service
-    newTag: a1cc8bbc8095b1b029eb6f5e26ed3dd66144be90
+    newTag: 355aa2ecb95547a08d7fa3fb9ee4d59949843581
   - name: ghcr.io/baha0x13/ticket-sale-auth-service
-    newTag: a1cc8bbc8095b1b029eb6f5e26ed3dd66144be90
+    newTag: 355aa2ecb95547a08d7fa3fb9ee4d59949843581
   - name: ghcr.io/baha0x13/ticket-sale-movie-service
-    newTag: a1cc8bbc8095b1b029eb6f5e26ed3dd66144be90
+    newTag: 355aa2ecb95547a08d7fa3fb9ee4d59949843581
   - name: ghcr.io/baha0x13/ticket-sale-notifications-service
-    newTag: a1cc8bbc8095b1b029eb6f5e26ed3dd66144be90
+    newTag: 355aa2ecb95547a08d7fa3fb9ee4d59949843581
   - name: ghcr.io/baha0x13/ticket-sale-frontend
-    newTag: a1cc8bbc8095b1b029eb6f5e26ed3dd66144be90
+    newTag: 355aa2ecb95547a08d7fa3fb9ee4d59949843581

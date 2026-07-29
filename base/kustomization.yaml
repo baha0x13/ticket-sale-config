@@ -32,3 +32,4 @@ configMapGenerator:
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_SECURE=false
+      - FRONTEND_ORIGIN=http://ticket-sale.staging.local

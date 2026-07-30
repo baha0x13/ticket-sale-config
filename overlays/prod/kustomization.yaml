@@ -21,7 +21,8 @@ configMapGenerator:
     namespace: app
     behavior: merge
     literals:
-      - DB_PORT=3307
+      - DB_HOST=aws-0-eu-west-1.pooler.supabase.com
+      - DB_PORT=5432
       - API_GATEWAY_URL=http://api.ticket-sale.local
       - FRONTEND_ORIGIN=http://ticket-sale.local
 

@@ -20,8 +20,8 @@ configMapGenerator:
   - name: app-config
     namespace: app
     literals:
-      - DB_HOST=host.minikube.internal
-      - DB_PORT=3308
+      - DB_HOST=aws-0-eu-central-1.pooler.supabase.com
+      - DB_PORT=5432
       - AMQP_URL=amqp://guest:guest@rabbitmq.data
       - MOVIES_QUEUE=movies
       - ORDERS_QUEUE=orders

@@ -1,0 +1,59 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: auth-service
+  namespace: app
+  labels:
+    app: auth-service
+spec:
+  selector:
+    matchLabels:
+      app: auth-service
+  podMetricsEndpoints:
+    - port: http
+      path: /metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: api-service
+  namespace: app
+  labels:
+    app: api-service
+spec:
+  selector:
+    matchLabels:
+      app: api-service
+  podMetricsEndpoints:
+    - port: http
+      path: /metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: movie-service
+  namespace: app
+  labels:
+    app: movie-service
+spec:
+  selector:
+    matchLabels:
+      app: movie-service
+  podMetricsEndpoints:
+    - port: actuator
+      path: /metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: notifications-service
+  namespace: app
+  labels:
+    app: notifications-service
+spec:
+  selector:
+    matchLabels:
+      app: notifications-service
+  podMetricsEndpoints:
+    - port: actuator
+      path: /metrics

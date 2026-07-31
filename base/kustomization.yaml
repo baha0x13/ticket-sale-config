@@ -17,6 +17,8 @@ resources:
   - ingress.yaml
   - postgres-exporter/deployment.yaml
   - postgres-exporter/service.yaml
+  - monitoring/podmonitors.yaml
+  - monitoring/servicemonitors.yaml
 
 configMapGenerator:
   - name: app-config

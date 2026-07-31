@@ -19,6 +19,8 @@ spec:
           ports:
             - containerPort: 4000
               name: http
+            - containerPort: 9464
+              name: metrics
           env:
             - name: DB_HOST
               valueFrom:

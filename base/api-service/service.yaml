@@ -8,4 +8,8 @@ spec:
     app: api-service
   ports:
     - port: 3030
+      name: http
       targetPort: http
+    - port: 9464
+      name: metrics
+      targetPort: metrics

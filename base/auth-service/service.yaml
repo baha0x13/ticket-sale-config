@@ -8,4 +8,8 @@ spec:
     app: auth-service
   ports:
     - port: 4000
+      name: http
       targetPort: http
+    - port: 9464
+      name: metrics
+      targetPort: metrics

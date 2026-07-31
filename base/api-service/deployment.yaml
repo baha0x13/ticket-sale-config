@@ -19,6 +19,8 @@ spec:
           ports:
             - containerPort: 3030
               name: http
+            - containerPort: 9464
+              name: metrics
           env:
             - name: AMQP_URL
               valueFrom:

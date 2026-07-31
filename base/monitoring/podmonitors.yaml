@@ -10,7 +10,7 @@ spec:
     matchLabels:
       app: auth-service
   podMetricsEndpoints:
-    - port: http
+    - port: metrics
       path: /metrics
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -25,7 +25,7 @@ spec:
     matchLabels:
       app: api-service
   podMetricsEndpoints:
-    - port: http
+    - port: metrics
       path: /metrics
 ---
 apiVersion: monitoring.coreos.com/v1

@@ -12,7 +12,17 @@ spec:
     helm:
       values: |
         grafana:
-          enabled: false
+          enabled: true
+          admin:
+            existingSecret: grafana-admin-secret
+            userKey: admin-user
+            passwordKey: admin-password
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            hosts:
+              - grafana.ticket-sale.staging.local
+            path: /
         prometheus:
           prometheusSpec:
             retention: 3d

@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: rabbitmq
   namespace: data
+  labels:
+    app: rabbitmq
 spec:
   selector:
     app: rabbitmq
@@ -13,3 +15,6 @@ spec:
     - name: management
       port: 15672
       targetPort: management
+    - name: metrics
+      port: 15692
+      targetPort: metrics

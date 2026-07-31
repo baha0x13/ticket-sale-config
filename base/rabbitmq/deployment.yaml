@@ -21,6 +21,16 @@ spec:
               name: amqp
             - containerPort: 15672
               name: management
+            - containerPort: 15692
+              name: metrics
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - rabbitmq-plugins
+                  - enable
+                  - --offline
+                  - rabbitmq_prometheus
           livenessProbe:
             exec:
               command:

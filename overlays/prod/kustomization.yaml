@@ -6,15 +6,15 @@ resources:
 
 images:
   - name: ghcr.io/baha0x13/ticket-sale-api-service
-    newTag: 0fa7cd6ed7b1a47f4f699826b48d9047b189f762
+    newTag: 3560a91435279343b5dc4a5d907bf73b76e304de
   - name: ghcr.io/baha0x13/ticket-sale-auth-service
-    newTag: 0fa7cd6ed7b1a47f4f699826b48d9047b189f762
+    newTag: 3560a91435279343b5dc4a5d907bf73b76e304de
   - name: ghcr.io/baha0x13/ticket-sale-movie-service
-    newTag: 0fa7cd6ed7b1a47f4f699826b48d9047b189f762
+    newTag: 3560a91435279343b5dc4a5d907bf73b76e304de
   - name: ghcr.io/baha0x13/ticket-sale-notifications-service
-    newTag: 0fa7cd6ed7b1a47f4f699826b48d9047b189f762
+    newTag: 3560a91435279343b5dc4a5d907bf73b76e304de
   - name: ghcr.io/baha0x13/ticket-sale-frontend
-    newTag: 0fa7cd6ed7b1a47f4f699826b48d9047b189f762
+    newTag: 3560a91435279343b5dc4a5d907bf73b76e304de
 
 configMapGenerator:
   - name: app-config

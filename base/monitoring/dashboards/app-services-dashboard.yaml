@@ -1,0 +1,136 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-app-services
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  app-services.json: |
+    {
+      "title": "Ticket Sale - App Services",
+      "uid": "ticket-sale-app-services",
+      "timezone": "utc",
+      "schemaVersion": 39,
+      "version": 1,
+      "time": { "from": "now-1h", "to": "now" },
+      "refresh": "30s",
+      "panels": [
+        {
+          "id": 1,
+          "title": "HTTP Request Rate (auth-service, api-service)",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+          "targets": [
+            {
+              "expr": "sum(rate(http_request_duration_seconds_count{job=~\"auth-service|api-service\"}[5m])) by (job, route)",
+              "legendFormat": "{{job}} {{route}}",
+              "datasource": { "type": "prometheus", "uid": "prometheus" }
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "HTTP p95 Latency",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+          "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] },
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{job=~\"auth-service|api-service\"}[5m])) by (le, job, route))",
+              "legendFormat": "{{job}} {{route}}",
+              "datasource": { "type": "prometheus", "uid": "prometheus" }
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "HTTP 5xx Error Rate",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+          "targets": [
+            {
+              "expr": "sum(rate(http_request_duration_seconds_count{job=~\"auth-service|api-service\", status_code=~\"5..\"}[5m])) by (job)",
+              "legendFormat": "{{job}}",
+              "datasource": { "type": "prometheus", "uid": "prometheus" }
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "title": "AMQP Messages Processed (movie-service)",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+          "targets": [
+            {
+              "expr": "sum(rate(amqp_messages_processed_total{job=\"movie-service\"}[5m])) by (action, status)",
+              "legendFormat": "{{action}} ({{status}})",
+              "datasource": { "type": "prometheus", "uid": "prometheus" }
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Emails Sent (notifications-service)",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 16 },
+          "targets": [
+            {
+              "expr": "sum(rate(emails_sent_total{job=\"notifications-service\"}[5m])) by (status)",
+              "legendFormat": "{{status}}",
+              "datasource": { "type": "prometheus", "uid": "prometheus" }
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "title": "Node.js Memory (RSS)",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 16 },
+          "fieldConfig": { "defaults": { "unit": "bytes" }, "overrides": [] },
+          "targets": [
+            {
+              "expr": "process_resident_memory_bytes{job=~\"auth-service|api-service|movie-service|notifications-service\"}",
+              "legendFormat": "{{job}}",
+              "datasource": { "type": "prometheus", "uid": "prometheus" }
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "title": "Node.js Event Loop Lag",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 24 },
+          "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] },
+          "targets": [
+            {
+              "expr": "nodejs_eventloop_lag_seconds{job=~\"auth-service|api-service|movie-service|notifications-service\"}",
+              "legendFormat": "{{job}}",
+              "datasource": { "type": "prometheus", "uid": "prometheus" }
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "title": "Node.js CPU Usage",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 24 },
+          "targets": [
+            {
+              "expr": "rate(process_cpu_seconds_total{job=~\"auth-service|api-service|movie-service|notifications-service\"}[5m])",
+              "legendFormat": "{{job}}",
+              "datasource": { "type": "prometheus", "uid": "prometheus" }
+            }
+          ]
+        }
+      ]
+    }
+

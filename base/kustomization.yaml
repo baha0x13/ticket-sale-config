@@ -19,6 +19,9 @@ resources:
   - postgres-exporter/service.yaml
   - monitoring/podmonitors.yaml
   - monitoring/servicemonitors.yaml
+  - monitoring/dashboards/rabbitmq-dashboard.yaml
+  - monitoring/dashboards/postgres-exporter-dashboard.yaml
+  - monitoring/dashboards/app-services-dashboard.yaml
 
 configMapGenerator:
   - name: app-config
